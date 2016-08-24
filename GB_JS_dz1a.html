@@ -1,7 +1,9 @@
 <meta charset="utf-8">
 <title>Первое альтернативное домашнее задание</title>
 <script>
-
+/*
+1) Напишите функцию для создания таблицы размером NхM. Такой, чтобы каждая ячейка заполнялась случайной буквой русского алфавита и случайным цветом фона (для выполнения задания, воспользуйтесь методом Math.Random объекта Math; кроме того создайте массив в элементами – буквами алфавита).
+*/
     function cRand() {// Функция для получения рандомного цвета
         var r=Math.floor(Math.random() * (256));
         var g=Math.floor(Math.random() * (256));
@@ -11,13 +13,12 @@
     }
     function onTable(line, column) {// функция создает таблицу размером NxM
         var chars = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-        var rNum = Math.floor(Math.random() * chars.length);
         document.write("<table border=1>");
-        
         for (i=1;i<=line;i++) {
             document.write("<tr>"); //вводим новую строку
             
             for (k=1;k<=column;k++) { // цикл добавляет столбец, также задается цвет фона каждому элементу и добавляется рандомная буква из заданного цикла
+                var rNum = Math.floor(Math.random() * chars.length);
                 document.write("<td style=\"background:" + cRand() + "\">");
                 document.write(chars.substring(rNum,rNum+1));
                 document.write("</td>");
