@@ -1,0 +1,29 @@
+<meta charset="utf-8">
+<title>Второе альтернативное домашнее задание</title>
+<script>
+/*
+2) Напишите функцию создания шахматной доски: таблица размером 8х8, в которой строки и столбцы пронумерованы соответствующим образом, а так же ячейки чередуются по цвету. Подсказка: для чередования можно использовать операцию %. 
+*/
+    document.write("<table border=1>");
+    for(var i=0;i<9;i++){
+        document.write("<tr>");
+        for(var j=0;j<9;j++){
+            if(i==0){ //в первой строке нумеруем столбцы
+                var nameLetter = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+                document.write("<td>" + nameLetter[j] + "</td>"); 
+            }else{
+                if(j==0){ 
+                    document.write("<td>" + i + "</td>"); // нумеруем строки
+                } else if ((i%2==0 && j%2==0) || (i%2!=0 && j%2!=0)){ // задаем чередующийся цвет для всех ячеек
+                    document.write("<td style=\"background:" + "#000000" + "\">");
+                    document.write("</td>");
+                } else {
+                    document.write("<td>");
+                    document.write("</td>");
+                }
+            }
+        }
+        document.write("</tr>");
+    }
+    document.write("</table>");
+</script>
