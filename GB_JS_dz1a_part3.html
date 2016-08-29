@@ -1,0 +1,32 @@
+<meta charset="utf-8">
+<title>Второе альтернативное домашнее задание</title>
+<style>td {width: 20px; height: 20px; text-align: center;}</style>
+<script>
+/*
+3) Сделать так, чтобы при нажатии на ячейку шахматной доски извлекался ее адрес, например, А1 и тп. и записывался в произвольное место страницы.   
+*/ 
+document.write("<table border=1 id=\"chessTable\">");
+for(var i=0;i<9;i++){
+    document.write("<tr>");
+    for(var j=0;j<9;j++){
+        if(i==0){ // в первой строке нумеруем столбцы
+            var nameColumn = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+            document.write("<td>" + nameColumn[j] + "</td>"); 
+        }else{ // 
+            var classCell = " class=\"" + nameColumn[j] + i + "\" "; // переменная для добавления "координаты" ячейки в класс
+            if(j==0){ // в первом столбце нумеруем строки
+                document.write("<td>" + i + "</td>");
+            } else if ((i%2==0 && j%2==0) || (i%2!=0 && j%2!=0)){ // задаем черный цвет через ячейку
+                document.write("<td" + classCell + "style=\"background:#000000\"></td>");
+            } else { 
+            }
+        }
+    }
+    document.write("</tr>");
+}
+document.write("</table><div id='cellDate'></div>");
+
+chessTable.onclick = function (event) {
+    var dataCell = event.target.className;
+    document.getElementById("cellDate").innerHTML += dataCell + '<br>';}
+</script>
