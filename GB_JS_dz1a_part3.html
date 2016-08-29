@@ -9,16 +9,17 @@ document.write("<table border=1 id=\"chessTable\">");
 for(var i=0;i<9;i++){
     document.write("<tr>");
     for(var j=0;j<9;j++){
-        if(i==0){ // в первой строке нумеруем столбцы
+        if(i==0){
             var nameColumn = [' ', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
             document.write("<td>" + nameColumn[j] + "</td>"); 
         }else{ // 
-            var classCell = " class=\"" + nameColumn[j] + i + "\" "; // переменная для добавления "координаты" ячейки в класс
-            if(j==0){ // в первом столбце нумеруем строки
+            var classCell = " class=\"" + nameColumn[j] + i + "\" ";
+            if(j==0){
                 document.write("<td>" + i + "</td>");
-            } else if ((i%2==0 && j%2==0) || (i%2!=0 && j%2!=0)){ // задаем черный цвет через ячейку
+            } else if ((i%2==0 && j%2==0) || (i%2!=0 && j%2!=0)){
                 document.write("<td" + classCell + "style=\"background:#000000\"></td>");
             } else { 
+                document.write("<td" + classCell + "></td>");
             }
         }
     }
