@@ -1,0 +1,72 @@
+<meta charset='utf-8'>
+<title>Домашнее задание первого урока четвертая часть</title>
+<style>
+  table {
+    border-collapse: collapse; /* Отображать двойные линии как одинарные */
+  }
+  td, th {
+    border: 1px solid #800; /* Параметры границы */
+    padding: 4px; /* Поля в ячейках */
+  } 
+  h4 {
+    font-family: monospace;
+    font-size: 1.5em;
+  }
+</style>
+<body>
+<h4>4) Сделать так, чтобы при нажатии на ячейку шахматной доски выбранная ячейка выделялась, например, утолщением ее границ, изменением цвета или любым другим способом. При это нужно, чтобы одновременно могла быть выделена только одна ячейка. Т.е. если нажимается еще одна ячейка - предыдущая должна вернуться в исходное состояние. </h4>
+
+<script>
+  var arrNameCell = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'], selectedTd, cacheBackgroundColor;
+  
+  function chessTable() {
+    document.write("<table id='chess'>");
+    for (var i = 0; i <= 8; i++) {      
+      document.write("<tr>");
+      for (var k = 0; k <= 8; k++) {
+        if(k == 0 && i != 0) {
+          document.write("<th>" + i + "</th>");
+        } else if (i == 0){
+          document.write("<th>" + arrNameCell[k] + "</th>");
+        } else {
+          document.write("<td></td>");
+          if (( i % 2 == 0 && k % 2 == 0) || (i % 2 != 0 && k % 2 != 0)) {
+            document.getElementById('chess').rows[i].cells[k].style.backgroundColor="#000";
+          } else {
+            document.getElementById('chess').rows[i].cells[k].style.backgroundColor="#f9c4ab";
+          }
+        }
+      }
+      document.write("</tr>");
+    }
+    document.write("</table>");
+  } /* ф-ция создает шахматную доску */
+  
+  function highlight(node) {
+    if (selectedTd) {
+      selectedTd.style.backgroundColor=cacheBackgroundColor;
+    }
+    cacheBackgroundColor = node.style.backgroundColor;
+    selectedTd = node;
+    selectedTd.style.backgroundColor='red';
+  } /* ф-ция подсвечивает выбранную ячейку, предыдущей выбранной ячейке возвращает цвет */
+  
+  chessTable();
+  
+  window.onclick = function(event) {
+    var target = event.target;
+    if (target.tagName != 'TD') return;
+    var crResult = arrNameCell[target.cellIndex] + target.parentNode.rowIndex;
+    var newLi = document.createElement('li');
+    newLi.innerHTML = crResult;
+
+    list.appendChild(newLi);
+    highlight(target);
+  } /* Вывод "координат" и смена цвета только ячейки таблицы у которой произошло событие нажатие кнопки мыши */
+
+</script>
+
+<ol id='list'>
+</ol>
+  
+</body>

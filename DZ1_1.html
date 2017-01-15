@@ -1,0 +1,57 @@
+<meta charset='utf-8'>
+<title>Домашнее задание первого урока первая часть</title>
+<style>
+  table {
+    border-collapse: collapse; /* Отображать двойные линии как одинарные */
+  }
+  th {
+    background: #ccc; /* Цвет фона */
+  }
+  td, th {
+    border: 1px solid #800; /* Параметры границы */
+    padding: 4px; /* Поля в ячейках */
+  }  
+  h4 {
+    font-family: monospace;
+    font-size: 1.5em;
+  }
+</style>
+<body>
+<h4>1) Напишите функцию для создания таблицы размером NхM. Такой, чтобы каждая ячейка заполнялась случайной буквой русского алфавита и случайным цветом фона (для выполнения задания, воспользуйтесь методом [Math.Random](http://javascript.ru/Math.random) объекта Math; кроме того создайте массив в элементами – буквами алфавита).</h4>
+
+<script>
+  var col = 10;
+  var cel = 10;
+  
+  function cRand() {
+    var r=Math.floor(Math.random() * (256));
+    var g=Math.floor(Math.random() * (256));
+    var b=Math.floor(Math.random() * (256));
+    var color='#' + r.toString(16) + g.toString(16) + b.toString(16);
+    return color;
+  } /* ф-ция получения рандомного цвета */
+  
+  function wRand(){
+    //var chars ='АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя';
+    var chars ='АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ';
+    var rNum = Math.floor(Math.random() * chars.length);
+    return chars.substring(rNum,rNum+1);
+  } /* ф-ция получения рандомной буквы */
+
+  function onTable(N, M) {
+    document.write("<table id='table'>");
+    for (i = 0; i < N; i++) { /* добавляем N строк */      
+      document.write("<tr>");
+      for (k = 0; k < M; k++) { /* добавляем M ячеек */
+        document.write("<td>" + wRand() + "</td>");
+        document.getElementById('table').rows[i].cells[k].style.backgroundColor = cRand();
+      }
+      document.write("</tr>");
+    }
+    document.write("</table>");
+  } /* ф-ция создает таблицу размера N(строк)xM(ячеек) */
+  
+  onTable(col,cel);
+</script>
+
+</body>

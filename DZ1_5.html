@@ -1,0 +1,117 @@
+<meta charset='utf-8'>
+<title>Домашнее задание первого урока пятая часть</title>
+<style>
+  table {
+    border-collapse: collapse; /* Отображать двойные линии как одинарные */
+  }
+  td, th {
+    border: 1px solid #800; /* Параметры границы */
+    padding: 4px; /* Поля в ячейках */
+  } 
+  h4 {
+    font-family: monospace;
+    font-size: 1.5em;
+  }
+</style>
+<body>
+<h4>5) Сделать, чтобы выделение ячейки можно было перемещать стрелками на клавиатуре. Так же при этом должен срабатывать код из п. 3. P.S. Для создания элементов можно, например, пользоваться свойствами innerText и innerHtml</h4>
+
+<script>
+  var arrNameCell = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'], selectedTd, cacheBackgroundColor;
+  
+  
+  function chessTable() {
+    document.write("<table id='chess'>");
+    for (var i = 0; i <= 8; i++) {      
+      document.write("<tr>");
+      for (var k = 0; k <= 8; k++) {
+        if(k == 0 && i != 0) {
+          document.write("<th>" + i + "</th>");
+        } else if (i == 0){
+          document.write("<th>" + arrNameCell[k] + "</th>");
+        } else {
+          document.write("<td></td>");
+          if (( i % 2 == 0 && k % 2 == 0) || (i % 2 != 0 && k % 2 != 0)) {
+            chess.rows[i].cells[k].style.backgroundColor="#000";
+          } else {
+            chess.rows[i].cells[k].style.backgroundColor="#f9c4ab";
+          }
+        }
+      }
+      document.write("</tr>");
+    }
+    document.write("</table>");
+  } /* ф-ция создает шахматную доску */
+  
+  function highlight(node) {
+    if (selectedTd) {
+      selectedTd.style.backgroundColor=cacheBackgroundColor;
+    }
+    cacheBackgroundColor = node.style.backgroundColor;
+    selectedTd = node;
+    selectedTd.style.backgroundColor='red';
+  } /* ф-ция подсвечивает выбранную ячейку, предыдущей выбранной ячейке возвращает цвет */
+  function logFile(result) {
+    var newLi = document.createElement('li');
+    newLi.innerHTML = result;
+    list.appendChild(newLi);
+  } 
+  
+  chessTable();
+  
+  window.onclick = function(event) {
+    var target = event.target;
+    if (target.tagName != 'TD') return;
+    var crResult = arrNameCell[target.cellIndex] + target.parentNode.rowIndex;
+    
+    logFile(crResult);
+    highlight(target);
+  } /* Вывод "координат" и смена цвета только ячейки таблицы у которой произошло событие нажатие кнопки мыши */
+  
+  window.onkeydown = function(event) {
+    switch(event.keyCode) {
+      case 37: // left
+        var r = selectedTd.parentElement.rowIndex;
+        var c = selectedTd.cellIndex;
+        var cnew = c - 1;
+        if(c <= 1){cnew = 1}
+        var newCell = chess.rows[r].cells[cnew];
+        var nResult = arrNameCell[cnew] + r;
+        if(cnew > 0) {highlight(newCell); logFile(nResult);}
+      break;
+      case 38: // up
+        var r = selectedTd.parentElement.rowIndex;
+        var c = selectedTd.cellIndex;
+        var rnew = r - 1;
+        if(r <= 1){rnew = 1}
+        var newCell = chess.rows[rnew].cells[c];
+        var nResult = arrNameCell[c] + rnew;
+        if(true) {highlight(newCell); logFile(nResult);}
+      break;
+      case 39: // right
+        var r = selectedTd.parentElement.rowIndex;
+        var c = selectedTd.cellIndex;
+        var cnew = c + 1;
+        if(c < 1){cnew = 1}
+        var newCell = chess.rows[r].cells[cnew];
+        var nResult = arrNameCell[cnew] + r;
+        if(cnew < 9) {highlight(newCell); logFile(nResult);}
+      break;
+      case 40: // down
+        var r = selectedTd.parentElement.rowIndex;
+        var c = selectedTd.cellIndex;
+        var rnew = r + 1;
+        if(r < 1){rnew = 1}
+        var newCell = chess.rows[rnew].cells[c];
+        var nResult = arrNameCell[c] + rnew;
+        if(rnew < 9) {highlight(newCell); logFile(nResult);}
+      break;
+    } /* обработка событий нажатия стрелочных клавиш */
+  }
+
+</script>
+
+<ol id='list'>
+</ol>
+  
+</body>

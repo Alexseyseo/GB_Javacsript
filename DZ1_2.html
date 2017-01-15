@@ -1,0 +1,46 @@
+<meta charset='utf-8'>
+<title>Домашнее задание первого урока вторая часть</title>
+<style>
+  table {
+    border-collapse: collapse; /* Отображать двойные линии как одинарные */
+  }
+  td, th {
+    border: 1px solid #800; /* Параметры границы */
+    padding: 4px; /* Поля в ячейках */
+  } 
+  h4 {
+    font-family: monospace;
+    font-size: 1.5em;
+  }
+</style>
+<body>
+<h4>2) Напишите функцию создания шахматной доски: таблица размером 8х8, в которой строки и столбцы пронумерованы соответствующим образом, а так же ячейки чередуются по цвету. Подсказка: для чередования можно использовать операцию %.  </h4>
+
+<script>
+  function chessTable() {
+    document.write("<table id='chess'>");
+    for (var i = 0; i <= 8; i++) {      
+      document.write("<tr>");
+      for (var k = 0; k <= 8; k++) {
+        if(k == 0) {
+          document.write("<th>" + i + "</th>");
+        } else if (i == 0){
+          document.write("<th>" + k + "</th>");
+        } else {
+          document.write("<td></td>");
+          if (( i % 2 == 0 && k % 2 == 0) || (i % 2 != 0 && k % 2 != 0)) {
+            document.getElementById('chess').rows[i].cells[k].style.backgroundColor="#000";
+          } else {
+            
+            document.getElementById('chess').rows[i].cells[k].style.backgroundColor="#f9c4ab";
+          }
+        }
+      }
+      document.write("</tr>");
+    }
+    document.write("</table>");
+  } /* ф-ция создает шахматную доску */
+  
+  chessTable();
+</script>
+</body>

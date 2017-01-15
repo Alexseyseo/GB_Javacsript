@@ -1,0 +1,60 @@
+<meta charset='utf-8'>
+<title>Домашнее задание первого урока третья часть</title>
+<style>
+  table {
+    border-collapse: collapse; /* Отображать двойные линии как одинарные */
+  }
+  td, th {
+    border: 1px solid #800; /* Параметры границы */
+    padding: 4px; /* Поля в ячейках */
+  } 
+  h4 {
+    font-family: monospace;
+    font-size: 1.5em;
+  }
+</style>
+<body>
+<h4>3) Сделать так, чтобы при нажатии на ячейку шахматной доски извлекался ее адрес, например, А1 и тп. и записывался в произвольное место страницы.</h4>
+
+<script>
+  var arrNameCell = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+  
+  function chessTable() {
+    document.write("<table id='chess'>");
+    for (var i = 0; i <= 8; i++) {      
+      document.write("<tr>");
+      for (var k = 0; k <= 8; k++) {
+        if(k == 0 && i != 0) {
+          document.write("<th>" + i + "</th>");
+        } else if (i == 0){
+          document.write("<th>" + arrNameCell[k] + "</th>");
+        } else {
+          document.write("<td></td>");
+          if (( i % 2 == 0 && k % 2 == 0) || (i % 2 != 0 && k % 2 != 0)) {
+            document.getElementById('chess').rows[i].cells[k].style.backgroundColor="#000";
+          } else {
+            document.getElementById('chess').rows[i].cells[k].style.backgroundColor="#f9c4ab";
+          }
+        }
+      }
+      document.write("</tr>");
+    }
+    document.write("</table>");
+  } /* ф-ция создает шахматную доску */
+  
+  chessTable();
+  
+  window.onclick = function(event) {
+    if (event.target.tagName != 'TD') return;
+    var crResult = arrNameCell[event.target.cellIndex] + event.target.parentNode.rowIndex;
+    var newLi = document.createElement('li');
+    newLi.innerHTML = crResult;
+
+    list.appendChild(newLi);
+  } /* обработка события только для ячеек таблицы */
+
+</script>
+
+<ol id='list'>
+</ol>
+</body>
