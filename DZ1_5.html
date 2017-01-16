@@ -6,7 +6,7 @@
   }
   td, th {
     border: 1px solid #800; /* Параметры границы */
-    padding: 4px; /* Поля в ячейках */
+    padding: 10px; /* Поля в ячейках */
   } 
   h4 {
     font-family: monospace;
@@ -18,8 +18,7 @@
 
 <script>
   var arrNameCell = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'], selectedTd, cacheBackgroundColor;
-  
-  
+   
   function chessTable() {
     document.write("<table id='chess'>");
     for (var i = 0; i <= 8; i++) {      
@@ -55,7 +54,7 @@
     var newLi = document.createElement('li');
     newLi.innerHTML = result;
     list.appendChild(newLi);
-  } 
+  } /* ф-ция выводит "координату" ячейки с которой происходит событие */
   
   chessTable();
   
@@ -66,7 +65,7 @@
     
     logFile(crResult);
     highlight(target);
-  } /* Вывод "координат" и смена цвета только ячейки таблицы у которой произошло событие нажатие кнопки мыши */
+  } /* обработка событий кнопки мыши */
   
   window.onkeydown = function(event) {
     switch(event.keyCode) {
@@ -74,7 +73,6 @@
         var r = selectedTd.parentElement.rowIndex;
         var c = selectedTd.cellIndex;
         var cnew = c - 1;
-        if(c <= 1){cnew = 1}
         var newCell = chess.rows[r].cells[cnew];
         var nResult = arrNameCell[cnew] + r;
         if(cnew > 0) {highlight(newCell); logFile(nResult);}
@@ -83,16 +81,14 @@
         var r = selectedTd.parentElement.rowIndex;
         var c = selectedTd.cellIndex;
         var rnew = r - 1;
-        if(r <= 1){rnew = 1}
         var newCell = chess.rows[rnew].cells[c];
         var nResult = arrNameCell[c] + rnew;
-        if(true) {highlight(newCell); logFile(nResult);}
+        if(rnew > 0) {highlight(newCell); logFile(nResult);}
       break;
       case 39: // right
         var r = selectedTd.parentElement.rowIndex;
         var c = selectedTd.cellIndex;
         var cnew = c + 1;
-        if(c < 1){cnew = 1}
         var newCell = chess.rows[r].cells[cnew];
         var nResult = arrNameCell[cnew] + r;
         if(cnew < 9) {highlight(newCell); logFile(nResult);}
@@ -101,17 +97,14 @@
         var r = selectedTd.parentElement.rowIndex;
         var c = selectedTd.cellIndex;
         var rnew = r + 1;
-        if(r < 1){rnew = 1}
         var newCell = chess.rows[rnew].cells[c];
         var nResult = arrNameCell[c] + rnew;
         if(rnew < 9) {highlight(newCell); logFile(nResult);}
       break;
-    } /* обработка событий нажатия стрелочных клавиш */
-  }
-
+    }
+  } /* обработка событий нажатия стрелочных клавиш */
 </script>
 
 <ol id='list'>
 </ol>
-  
 </body>
